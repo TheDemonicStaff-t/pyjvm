@@ -11,6 +11,12 @@ def tag(i:int)->str:
     match(i):
         case 10:
             return "Methodref"
+        case 9:
+            return "Fieldref"
+        case 8:
+            return "String"
+        case 7:
+            return "Class"
         case _:
             assert False, "Unimplemented tag: " + str(i)
 
@@ -33,6 +39,13 @@ class jvm:
                     const['class_index'] = pu_2(self.f)-1
                     const['name_and_type_index'] = pu_2(self.f)-1
                     print(const)
+                case "Fieldref":
+                    const['class_index'] = pu_2(self.f)-1
+                    const['name_and_type_index'] = pu_2(self.f)-1
+                case "String":
+                    const['string_index'] = pu_2(self.f)-1
+                case "Class":
+                    const['name_index'] = pu_2(self.f)-1
                 case _:
                     assert False, str(const['tag'])+" type const unimplemented"
             self.const_pool.append(const)
